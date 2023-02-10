@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { NextPageContext } from "next";
 import { LocalVideo } from "../components/LocalVideo";
 import { RemoteVideo } from "../components/RemoteVideo";
-import { SkyWayAuthToken } from "./api/getToken";
 import { SkyWayRoom } from "@skyway-sdk/room";
 import dynamic from "next/dynamic";
 const RoomJoinButton = dynamic(() => import("../components/RoomJoinButton"), {
@@ -17,13 +16,11 @@ const RoomJoinButton = dynamic(() => import("../components/RoomJoinButton"), {
 //   uuidV4,
 // } from "@skyway-sdk/room";
 
-interface SkyWayAuthTokenProps {
-  skywayAuthToken: SkyWayAuthToken;
-}
+interface Props {}
 
 export type HandleJoinedRoom = (room: SkyWayRoom) => void;
 
-export default function App(props: SkyWayAuthTokenProps) {
+export default function App(props: Props) {
   const [me, setMe] = useState<null | SkyWayRoom>(null);
 
   return (
