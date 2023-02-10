@@ -9,6 +9,14 @@ import {
 } from "@skyway-sdk/room";
 type Props = {};
 
+interface SkyWayCredential {
+  channelName: string;
+  memberName: string;
+  iat: number;
+  exp: number;
+  authToken: string;
+}
+
 const RoomJoinButton: React.FC<Props> = (props) => {
   const [roomName, setRoomName] = useState<string>("");
   const [join, setJoinRoom] = useState<boolean>(false);
@@ -25,7 +33,7 @@ const RoomJoinButton: React.FC<Props> = (props) => {
     console.log(join);
     const joinRoom = async () => {
       const res = await fetch("http://localhost:3000/api/getToken");
-      const credential: Record<string, string | number> = await res.json();
+      const credential: SkyWayCredential = await res.json();
       const authToken: string = credential.authToken;
       const context = await SkyWayContext.Create(authToken);
       // const room = await SkyWayRoom.FindOrCreate(context, {

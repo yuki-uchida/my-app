@@ -6,13 +6,17 @@ const crypto = require("crypto");
 const id = process.env.SKYWAY_APP_ID;
 const secret = process.env.SKYWAY_SECRET_KEY;
 
-export interface SkyWayAuthToken {
-  token: string;
+interface SkyWayCredential {
+  channelName: string;
+  memberName: string;
+  iat: number;
+  exp: number;
+  authToken: string;
 }
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<SkyWayAuthToken>
+  res: NextApiResponse<SkyWayCredential>
 ) {
   const channelName = "a";
   const memberName = "b";
@@ -64,12 +68,12 @@ export default function handler(
     },
     secret
   );
-  const credential: Record<string, string | number> = {
+  const credential: SkyWayCredential = {
     channelName: channelName,
     memberName: memberName,
     iat: iat,
     exp: exp,
     authToken: token,
   };
-  res.status(200).json(credential);
+  res.status(200).send(credential);
 }
