@@ -21,8 +21,7 @@ export default function handler(
   const channelName = "a";
   const memberName = "b";
   const iat = Math.floor(Date.now() / 1000);
-  const exp = Math.floor(Date.now() / 1000) + 360000; // 10h
-
+  const exp = Math.floor(Date.now() / 1000) + 86400; // 10h
   const token = jwt.sign(
     {
       jti: crypto.randomUUID(),
